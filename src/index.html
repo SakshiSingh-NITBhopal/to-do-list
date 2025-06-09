@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><to-do-list></to-do-list></title>
+    <link href="./output.css" rel="stylesheet">
+    <style>
+        .hidden{
+            display: none;
+            
+
+        }
+    </style>
+</head>
+
+<body class="h-screen w-screen flex justify-center items-center text-wh font-sans">
+    <div class="bg-[#FFFDD0] w-[500px] h-[500px] rounded-2xl relative" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;">
+            <div class="w-full p-2">
+                <div class="w-full py-2 px-2 flex justify-between">
+                    <div class="text-3xl font-bold mx-5">Today</div>
+                    <div class="flex" >
+                        <img src="images/plus-sign.png" class="mx-3  hover:cursor-pointer" id="plus-icon">
+                        <img src="images/settings.png" class="mx-3">
+                    </div>
+                </div>
+            </div>
+             <div>
+                    <a href="#"><img src="images/smiling.png" class="h-[80px] w-[100px] absolute right-0" ></a>
+            </div>
+            <div class="w-[90%] h-[75%] m-6 rounded-2xl  border-4 border-black border-dashed p-5 bg-white">
+                <div id="input-box" class=" bg-[#F4BB44] rounded-xl absolute top-1/4 left-1/6 hidden" id="new-task" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" >
+                    <input type="text" placeholder="Add your task here" class="p-2 bg-white outline-hidden mx-2 my-4 rounded-s-sm" id="new-task">
+                    <button class="px-4 py-2 mx-2 text-white outline-hidden  hover:bg-[#C4B454] rounded-sm hover:cursor-pointer" id="add-button">Add</button>
+                </div>
+                <ul class="text-2xl" id="tasks-window">
+
+                    
+                </ul>
+            </div>
+           
+    </div>
+   <script src="index.js"></script>
+
+</body>
+</html>
