@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     const taskButton = document.getElementById("add-button");
     const taskWindow = document.getElementById("tasks-window");
     const taskArea = document.getElementById("task-area");
-    const toDo = document.getElementsByClassName("to-do");
     
     
     //iterating over to_do_tasks and displaying it
@@ -23,8 +22,11 @@ document.addEventListener("DOMContentLoaded",()=>{
     let number =  0;
     to_do_tasks.forEach(task => {
         const li  = document.createElement("li");
-        li.textContent = `${task.name}`;
+        li.innerHTML = `
+        ${task.name}
+        <button class="delete-button">Delete</button>`;
         li.setAttribute("data-number", `${number}`);
+        li.classList.add("to-do");
         taskWindow.appendChild(li);
         
         if(task.isCompleted === true) 
@@ -43,16 +45,20 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     taskButton.addEventListener("click",()=>{
         const li  = document.createElement("li");
-        li.textContent = `${newTask.value}`;
+        li.innerHTML = `${newTask.value}
+        <button class="delete-button">Delete</button>`;
         li.classList.add("to-do");
+        li.setAttribute("data-number", `${number}`);
         taskWindow.appendChild(li);
 
         //push new item to array and update localstorage
         const newList =
         {
+            id : number,
             name : newTask.value,
             isCompleted : false
         };
+        number++;
         to_do_tasks.push(newList);
         localStorage.setItem("tasks",JSON.stringify(to_do_tasks));
         
@@ -69,12 +75,29 @@ document.addEventListener("DOMContentLoaded",()=>{
             console.log(e.target);    
 
             //find the element in the array and toggle isCompleted value
-            const selectedTask = to_do_tasks.find(task => task.name === e.target.textContent);
-
+            const taskId = e.target.getAttribute("data-number");
+            const selectedTask = to_do_tasks.find(task => task.id === Number(taskId));
+            
             selectedTask.isCompleted = !(selectedTask.isCompleted);
             localStorage.setItem("tasks",JSON.stringify(to_do_tasks));
             console.log(to_do_tasks);
             
         }
+        //adding delete feature
+        else if(e.target.tagName === "BUTTON")
+        {
+            console.log("hi from delete");
+            const deleteElement = e.target.closest(".to-do"); 
+            const deleteId = Number(e.target.closest(".to-do").getAttribute("data-number"));
+            
+            const updated_tasks = to_do_tasks.filter(task => task.id !== deleteId);
+            console.log(updated_tasks);
+            localStorage.setItem("tasks",JSON.stringify(updated_tasks));
+            
+            deleteElement.remove();
+        }
+        
     })
+
+
 });
