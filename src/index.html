@@ -8,9 +8,11 @@
     <style>
         .hidden{
             display: none;
-            
-
         }
+        .strikethrough {
+            text-decoration: line-through;
+        }
+
     </style>
 </head>
 
@@ -28,7 +30,7 @@
              <div>
                     <a href="#"><img src="images/smiling.png" class="h-[80px] w-[100px] absolute right-0" ></a>
             </div>
-            <div class="w-[90%] h-[75%] m-6 rounded-2xl  border-4 border-black border-dashed p-5 bg-white">
+            <div class="w-[90%] h-[75%] m-6 rounded-2xl  border-4 border-black border-dashed p-5 bg-white overflow-auto" id="task-area">
                 <div id="input-box" class=" bg-[#F4BB44] rounded-xl absolute top-1/4 left-1/6 hidden" id="new-task" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" >
                     <input type="text" placeholder="Add your task here" class="p-2 bg-white outline-hidden mx-2 my-4 rounded-s-sm" id="new-task">
                     <button class="px-4 py-2 mx-2 text-white outline-hidden  hover:bg-[#C4B454] rounded-sm hover:cursor-pointer" id="add-button">Add</button>
