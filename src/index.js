@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded",()=>{
     const taskButton = document.getElementById("add-button");
     const taskWindow = document.getElementById("tasks-window");
     const taskArea = document.getElementById("task-area");
+    const settings = document.getElementById("settings");
+    const dropDown = document.getElementById("drop-down")
+    const clearAll = document.getElementById("clear-all");
+    const edit = document.getElementById("edit");
 
     //iterating over to_do_tasks and displaying it
     to_do_tasks.forEach(task => {
@@ -94,6 +98,18 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
         
     })
+    
 
-
+    settings.addEventListener("click", ()=>{
+        dropDown.classList.toggle("hidden");
+    })
+    
+    
+    clearAll.addEventListener("click",()=>{
+        taskWindow.innerHTML = "";
+        to_do_tasks = [];
+        localStorage.setItem("tasks",JSON.stringify(to_do_tasks));
+        dropDown.classList.toggle("hidden");
+        
+    })
 });

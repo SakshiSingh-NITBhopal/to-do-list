@@ -12,6 +12,10 @@
         .strikethrough {
             text-decoration: line-through;
         }
+         .to-do:hover {
+            cursor: pointer;
+        }
+        
         .delete-button{
             float: right;
             background-color: #F4BB44;
@@ -20,6 +24,7 @@
         }
         .delete-button:hover{
             background-color: #FFFDD0;
+            cursor: pointer;
         }
         .to-do{
             margin: 6px;
@@ -37,12 +42,15 @@
                     <div class="text-3xl font-bold mx-5">Today</div>
                     <div class="flex" >
                         <img src="images/plus-sign.png" class="mx-3  hover:cursor-pointer" id="plus-icon">
-                        <img src="images/settings.png" class="mx-3">
+                        <img src="images/settings.png" class="mx-3 cursor-pointer" id="settings">
+                            <div class=" bg-[#F4BB44] absolute top-3 hidden" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" id="drop-down" >
+                                <a class="block hover:bg-white p-2 cursor-pointer" id="clear-all">Clear all</a>
+                            </div>
                     </div>
                 </div>
             </div>
              <div>
-                    <a href="#"><img src="images/smiling.png" class="h-[80px] w-[100px] absolute right-0" ></a>
+                    <a href="#"><img src="images/smiling.png" class="h-[80px] w-[100px] absolute left-0" ></a>
             </div>
             <div class="w-[90%] h-[75%] m-6 rounded-2xl  border-4 border-black border-dashed p-5 bg-white overflow-auto" id="task-area">
                 <div id="input-box" class=" bg-[#F4BB44] rounded-xl absolute top-1/4 left-1/6 hidden" id="new-task" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;" >
