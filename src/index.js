@@ -4,15 +4,50 @@ document.addEventListener("DOMContentLoaded",()=>{
     console.log(to_do_tasks);
     
     const plusIcon = document.getElementById("plus-icon");
-    const inputBox = document.getElementById("input-box");
+    const inputForm = document.getElementById("input-form");
     const newTask = document.getElementById("new-task");
-    const taskButton = document.getElementById("add-button");
+    const addButton = document.getElementById("add-button");
     const taskWindow = document.getElementById("tasks-window");
     const taskArea = document.getElementById("task-area");
     const settings = document.getElementById("settings");
     const dropDown = document.getElementById("drop-down")
     const clearAll = document.getElementById("clear-all");
     const edit = document.getElementById("edit");
+
+    function addElement()
+    {
+        if(newTask.value.trim() === "")
+        {
+           alert("please add some task");
+            return;
+        }
+        let N = 100;
+        let randomNumber = Math.floor(Math.random() * N);
+         //generating random number
+
+        //grabbing input and adding into the dom as a alist
+        const li  = document.createElement("li");
+        li.innerHTML = `
+        ${newTask.value}
+        <button class="delete-button">Delete</button>`;
+        li.classList.add("to-do");
+        li.setAttribute("data-number", `${randomNumber}`);
+        taskWindow.appendChild(li);
+
+        //push new item to array and update localstorage
+        const newList =
+        {
+            id : randomNumber,
+            name : newTask.value,
+            isCompleted : false
+        };
+        to_do_tasks.push(newList);
+        localStorage.setItem("tasks",JSON.stringify(to_do_tasks));
+        
+        //erase the input box text and hide
+        newTask.value = "";
+        inputForm.classList.toggle("hidden");
+    }
 
     //iterating over to_do_tasks and displaying it
     to_do_tasks.forEach(task => {
@@ -34,36 +69,23 @@ document.addEventListener("DOMContentLoaded",()=>{
     
     plusIcon.addEventListener("click", ()=>{
         //displaying input box
-        inputBox.classList.toggle("hidden");  
+        inputForm.classList.toggle("hidden");  
     })
 
-    taskButton.addEventListener("click",()=>{
-        //generating random number
-        let N = 100;
-        let randomNumber = Math.floor(Math.random() * N);
-
-        //grabbing input and adding into the dom as a alist
-        const li  = document.createElement("li");
-        li.innerHTML = `${newTask.value}
-        <button class="delete-button">Delete</button>`;
-        li.classList.add("to-do");
-        li.setAttribute("data-number", `${randomNumber}`);
-        taskWindow.appendChild(li);
-
-        //push new item to array and update localstorage
-        const newList =
+    // adding key events to the + icon
+    document.addEventListener("keydown", (event)=>{
+        if(event.key === 'F4')
         {
-            id : randomNumber,
-            name : newTask.value,
-            isCompleted : false
-        };
-        to_do_tasks.push(newList);
-        localStorage.setItem("tasks",JSON.stringify(to_do_tasks));
-        
-        //erase the input box text and hide
-        newTask.value = "";
-        inputBox.classList.toggle("hidden");
+            inputForm.classList.toggle("hidden");  
+            newTask.focus(); 
+        }
     })
+   
+
+    addButton.addEventListener("click",()=>{
+       addElement();
+    })
+    
     
     taskArea.addEventListener("click",(e)=>{ 
         if(e.target.tagName === "LI")
@@ -96,7 +118,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             //removing the particular element from the dom
             deleteElement.remove();
         }
-        
+    
     })
     
 
@@ -112,4 +134,5 @@ document.addEventListener("DOMContentLoaded",()=>{
         dropDown.classList.toggle("hidden");
         
     })
+    console.log(to_do_tasks);
 });
